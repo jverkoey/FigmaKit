@@ -1,5 +1,5 @@
 public struct Figma {
     public static func hello() {
-        print("Hello world")
+        print("Hello world 2")
     }
 }
