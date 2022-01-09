@@ -16,17 +16,17 @@
 import PackageDescription
 
 let package = Package(
-  name: “FigmaKit”,
+  name: "FigmaKit",
   products: [
     .library(
-      name: “FigmaKit”,
-      path: “FigmaKit.playgroundbook/Edits/UserEdits.diffpack/UserModules/FigmaKit.playgroundmodule/Sources”,
-      targets: [“FigmaKit”]
+      name: "FigmaKit",
+      path: "FigmaKit.playgroundbook/Edits/UserEdits.diffpack/UserModules/FigmaKit.playgroundmodule/Sources",
+      targets: ["FigmaKit"]
     )
   ],
   targets: [
     .target(
-      name: “BinaryCodable”,
+      name: "BinaryCodable",
       dependencies: []
     )
   ]
