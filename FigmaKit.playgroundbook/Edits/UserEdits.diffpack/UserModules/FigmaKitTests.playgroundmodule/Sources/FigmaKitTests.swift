@@ -3,8 +3,8 @@ import FigmaKit
 import XCTest
 
 public final class FigmaKitTests: XCTestCase {
-    public override init() {
-        super.init()
+    public required init(name: String, testClosure: @escaping XCTestCaseClosure) {
+        super.init(name: name, testClosure: testClosure)
     }
     
     public static var allTests = {
@@ -14,6 +14,6 @@ public final class FigmaKitTests: XCTestCase {
     }()
     
     public func testTrue() {
-        XCTestAssertTrue(false)
+        XCTAssertTrue(false)
     }
 }
