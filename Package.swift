@@ -20,14 +20,14 @@ let package = Package(
   products: [
     .library(
       name: "FigmaKit",
-      path: "FigmaKit.playgroundbook/Edits/UserEdits.diffpack/UserModules/FigmaKit.playgroundmodule/Sources",
       targets: ["FigmaKit"]
     )
   ],
   targets: [
     .target(
-      name: "BinaryCodable",
-      dependencies: []
+      name: "FigmaKit",
+      dependencies: [],
+      path: "FigmaKit.playgroundbook/Edits/UserEdits.diffpack/UserModules/FigmaKit.playgroundmodule/Sources"
     )
   ]
 )
