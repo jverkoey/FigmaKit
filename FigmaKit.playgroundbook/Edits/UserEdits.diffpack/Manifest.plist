@@ -20,7 +20,7 @@
 		<string>Modified</string>
 		<key>Chapters/Chapter1.playgroundchapter/UserManifest.plist</key>
 		<string>Added</string>
-		<key>UserModules/FigmaKit.playgroundmodule/Sources/FigmaKit.swift</key>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Color.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Rectangle.swift</key>
 		<string>Added</string>
@@ -28,7 +28,7 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Vector.swift</key>
 		<string>Added</string>
-		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/FigmaKitTests.swift</key>
+		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/ColorTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/RectangleTests.swift</key>
 		<string>Added</string>

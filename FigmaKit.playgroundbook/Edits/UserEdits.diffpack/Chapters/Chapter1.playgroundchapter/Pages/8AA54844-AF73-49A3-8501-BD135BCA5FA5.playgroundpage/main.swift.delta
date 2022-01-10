@@ -20,8 +20,8 @@
 		<dict>
 			<key>ModifiedContent</key>
 			<string>XCTestRun(testCases: [
-    TestCase(FigmaKitTests(), tests: {[
-        $0.testTrue
+    TestCase(ColorTests(), tests: {[
+        $0.testDecoding
     ]}),
     TestCase(RectangleTests(), tests: {[
         $0.testDecoding
@@ -35,7 +35,7 @@
 ])
 </string>
 			<key>ModifiedRange</key>
-			<string>{22, 314}</string>
+			<string>{22, 315}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
