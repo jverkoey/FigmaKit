@@ -1,0 +1,2 @@
+This repository contains a forked subset of https://github.com/apple/swift-corelibs-xctest with the following modifications:
+- XCTAssert.swift was forked and parts that were aware of the XCTest runner were removed in order to enable the asserts to run in a Swift Playgrounds environment.

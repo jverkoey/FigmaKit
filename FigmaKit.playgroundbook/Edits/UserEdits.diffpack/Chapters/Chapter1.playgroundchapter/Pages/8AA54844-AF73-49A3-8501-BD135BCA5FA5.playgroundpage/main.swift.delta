@@ -9,29 +9,19 @@
 		<dict>
 			<key>ModifiedContent</key>
 			<string>import FigmaKitTests
-</string>
-			<key>ModifiedRange</key>
-			<string>{0, 21}</string>
-			<key>OriginalContent</key>
-			<string></string>
-			<key>OriginalRange</key>
-			<string>{0, 0}</string>
-		</dict>
-		<dict>
-			<key>ModifiedContent</key>
-			<string>let tests = FigmaKitTests.allTests
+
 let testHarness = FigmaKitTests()
-for test in tests {
-    print(test.0)
-    test.1(testHarness)
-}
+testHarness.testTrue()
+
+print("Finished")
 </string>
 			<key>ModifiedRange</key>
-			<string>{22, 133}</string>
+			<string>{0, 98}</string>
 			<key>OriginalContent</key>
-			<string></string>
+			<string>
+</string>
 			<key>OriginalRange</key>
-			<string>{1, 0}</string>
+			<string>{0, 1}</string>
 		</dict>
 	</array>
 	<key>FormatVersion</key>

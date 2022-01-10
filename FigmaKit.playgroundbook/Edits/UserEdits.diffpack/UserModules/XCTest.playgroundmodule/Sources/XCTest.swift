@@ -1,9 +1,6 @@
-open class XCTestCase {
-    public init() {
-        
-    }
-}
+public typealias XCTestCaseClosure = (XCTestCase) throws -> Void
 
-public func XCTestAssertTrue(_ value: Bool) {
-    assert(value, "value expected to be true, was \(value) instead")
+open class XCTestCase {
+    public required init(name: String, testClosure: @escaping XCTestCaseClosure) {
+    }
 }

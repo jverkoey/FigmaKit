@@ -26,6 +26,8 @@
 		<string>Added</string>
 		<key>UserModules/UserModule.playgroundmodule/Sources/SharedCode.swift</key>
 		<string>Removed</string>
+		<key>UserModules/XCTest.playgroundmodule/Sources/XCTAssert.swift</key>
+		<string>Added</string>
 		<key>UserModules/XCTest.playgroundmodule/Sources/XCTest.swift</key>
 		<string>Added</string>
 	</dict>
