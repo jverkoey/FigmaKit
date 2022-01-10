@@ -2,6 +2,10 @@ import FigmaKit
 import Foundation
 import XCTest
 
+struct MyError: Error {
+    
+}
+
 public final class RectangleTests: XCTestCase {
     public func testDecoding() throws {
         let json = """

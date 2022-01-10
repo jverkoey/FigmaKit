@@ -9,44 +9,34 @@
 		<dict>
 			<key>ModifiedContent</key>
 			<string>import FigmaKitTests
-
-struct TestCases {
-    let tests: [() throws -&gt; ()]
-    init&lt;T: XCTestCase&gt;(_ instance: T, tests: (T.Type) -&gt; [(T) -&gt; () throws -&gt; ()]) {
-        self.tests = tests(T.self).map { $0(instance) }
-    }
-}
-
-let testCases: [TestCases] = [
-    TestCases(FigmaKitTests(), tests: {[
-        $0.testTrue
-    ]}),
-    TestCases(RectangleTests(), tests: {[
-        $0.testDecoding
-    ]}),
-    TestCases(VectorTests(), tests: {[
-        $0.testDecoding
-    ]}),
-]
-
-var testsRan = 0
-let numberOfTests = testCases.reduce(0) { $0 + $1.tests.count }
-for testCase in testCases {
-    for test in testCase.tests {
-        testsRan += 1
-        try test()
-    }
-}
-
-print("Ran \(testsRan) / \(numberOfTests) tests.")
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 719}</string>
+			<string>{0, 21}</string>
 			<key>OriginalContent</key>
-			<string>
-</string>
+			<string></string>
 			<key>OriginalRange</key>
-			<string>{0, 1}</string>
+			<string>{0, 0}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>XCTestRun(testCases: [
+    TestCase(FigmaKitTests(), tests: {[
+        $0.testTrue
+    ]}),
+    TestCase(RectangleTests(), tests: {[
+        $0.testDecoding
+    ]}),
+    TestCase(VectorTests(), tests: {[
+        $0.testDecoding
+    ]}),
+])
+</string>
+			<key>ModifiedRange</key>
+			<string>{22, 240}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
 		</dict>
 	</array>
 	<key>FormatVersion</key>

@@ -14,6 +14,15 @@
 //  XCTAssert.swift
 //
 
+private var testFailed = false
+public func prepareForTest() {
+    testFailed = false
+}
+
+public func didTestFail() -> Bool {
+    return testFailed
+}
+
 private enum _XCTAssertion {
     case equal
     case equalWithAccuracy
@@ -118,6 +127,7 @@ private func _XCTEvaluateAssertion(_ assertion: _XCTAssertion, message: @autoclo
 ///   result of a failed assertion, `false` if it was the result of an
 ///   uncaught exception.
 private func recordFailure(withDescription description: String, inFile filePath: String, atLine lineNumber: Int, expected: Bool) {
+    testFailed = true
     let file = filePath ?? "<unknown>"
     print("\(filePath):\(lineNumber): error: \(description)")
 }
