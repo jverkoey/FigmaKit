@@ -10,13 +10,16 @@
 			<key>ModifiedContent</key>
 			<string>import FigmaKitTests
 
-let testHarness = FigmaKitTests()
-testHarness.testTrue()
+let figmaKitTests = FigmaKitTests()
+figmaKitTests.testTrue()
+
+let rectangleTests = RectangleTests()
+try rectangleTests.testDecoding()
 
 print("Finished")
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 98}</string>
+			<string>{0, 175}</string>
 			<key>OriginalContent</key>
 			<string>
 </string>

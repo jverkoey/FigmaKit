@@ -22,7 +22,11 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/FigmaKit.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Rectangle.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/FigmaKitTests.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/RectangleTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/UserModule.playgroundmodule/Sources/SharedCode.swift</key>
 		<string>Removed</string>
