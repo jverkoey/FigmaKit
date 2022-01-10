@@ -1,4 +1,5 @@
-/// A Figma rectangle type.
+/// A Figma rectangle.
+///
 /// "A rectangle that expresses a bounding box in absolute coordinates".
 /// https://www.figma.com/developers/api#rectangle-type
 public struct Rectangle: Codable {

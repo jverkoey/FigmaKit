@@ -10,16 +10,38 @@
 			<key>ModifiedContent</key>
 			<string>import FigmaKitTests
 
-let figmaKitTests = FigmaKitTests()
-figmaKitTests.testTrue()
+struct TestCases {
+    let tests: [() throws -&gt; ()]
+    init&lt;T: XCTestCase&gt;(_ instance: T, tests: (T.Type) -&gt; [(T) -&gt; () throws -&gt; ()]) {
+        self.tests = tests(T.self).map { $0(instance) }
+    }
+}
 
-let rectangleTests = RectangleTests()
-try rectangleTests.testDecoding()
+let testCases: [TestCases] = [
+    TestCases(FigmaKitTests(), tests: {[
+        $0.testTrue
+    ]}),
+    TestCases(RectangleTests(), tests: {[
+        $0.testDecoding
+    ]}),
+    TestCases(VectorTests(), tests: {[
+        $0.testDecoding
+    ]}),
+]
 
-print("Finished")
+var testsRan = 0
+let numberOfTests = testCases.reduce(0) { $0 + $1.tests.count }
+for testCase in testCases {
+    for test in testCase.tests {
+        testsRan += 1
+        try test()
+    }
+}
+
+print("Ran \(testsRan) / \(numberOfTests) tests.")
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 175}</string>
+			<string>{0, 719}</string>
 			<key>OriginalContent</key>
 			<string>
 </string>
