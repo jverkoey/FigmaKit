@@ -2,14 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
 	<key>Diffs</key>
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>import FigmaKit
+			<string>import FigmaKitTests
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 16}</string>
+			<string>{0, 21}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
@@ -17,10 +19,15 @@
 		</dict>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>Figma.hello()
+			<string>let tests = FigmaKitTests.allTests
+let testHarness = FigmaKitTests()
+for test in tests {
+    print(test.0)
+    test.1(testHarness)
+}
 </string>
 			<key>ModifiedRange</key>
-			<string>{17, 14}</string>
+			<string>{22, 133}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>

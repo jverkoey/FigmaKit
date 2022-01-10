@@ -28,6 +28,11 @@ let package = Package(
       name: "FigmaKit",
       dependencies: [],
       path: "FigmaKit.playgroundbook/Edits/UserEdits.diffpack/UserModules/FigmaKit.playgroundmodule/Sources"
+    ),
+    .testTarget(
+      name: "FigmaKitTests",
+      path: "FigmaKit.playgroundbook/Edits/UserEdits.diffpack/UserModules/FigmaKitTests.playgroundmodule/Sources",
+      dependencies: ["FigmaKit"]
     )
   ]
 )

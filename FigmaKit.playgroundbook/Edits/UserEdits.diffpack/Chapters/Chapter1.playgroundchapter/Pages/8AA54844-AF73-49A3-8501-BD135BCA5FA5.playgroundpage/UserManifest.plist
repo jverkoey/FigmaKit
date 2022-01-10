@@ -2,10 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UserPageFilenames</key>
-	<array>
-		<string>My Playground.playgroundpage</string>
-		<string>8AA54844-AF73-49A3-8501-BD135BCA5FA5.playgroundpage</string>
-	</array>
+	<key>BasePageFilename</key>
+	<string>Template.playgroundpage</string>
+	<key>Name</key>
+	<string>Tests</string>
 </dict>
 </plist>
