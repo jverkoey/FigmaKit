@@ -26,13 +26,16 @@
     TestCase(RectangleTests(), tests: {[
         $0.testDecoding
     ]}),
+    TestCase(TransformTests(), tests: {[
+        $0.testDecoding
+    ]}),
     TestCase(VectorTests(), tests: {[
         $0.testDecoding
     ]}),
 ])
 </string>
 			<key>ModifiedRange</key>
-			<string>{22, 240}</string>
+			<string>{22, 314}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>

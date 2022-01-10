@@ -24,11 +24,15 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Rectangle.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Transform.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Vector.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/FigmaKitTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/RectangleTests.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/TransformTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/VectorTests.swift</key>
 		<string>Added</string>
