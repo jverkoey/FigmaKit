@@ -1,9 +1,10 @@
+
 /// A Figma Paint.
 ///
 /// "A solid color, gradient, or image texture that can be applied as
 /// fills or strokes."
 /// https://www.figma.com/developers/api#paint-type
-public class Paint: Codable, CustomStringConvertible {
+public class Paint: PolymorphicDecodable, CustomStringConvertible {
     public let type: FigmaType
     public let visible: Bool = true
     public let opacity: Double = 1
@@ -13,25 +14,7 @@ public class Paint: Codable, CustomStringConvertible {
     /// The returned array's values will be instances of the corresponding type of
     /// paint.
     public static func decode(from decoder: UnkeyedDecodingContainer) throws -> [Paint] {
-        var paints: [Paint] = []
-        var fillDecoder = decoder
-        var fillTypeDecoder = decoder
-        while !fillDecoder.isAtEnd {
-            let fillTypeDecoder = try fillTypeDecoder.nestedContainer(keyedBy: Paint.CodingKeys.self)
-            let fillFigmaType = try fillTypeDecoder.decode(Paint.FigmaType.self, forKey: .type)
-            
-            guard let fillType = Paint.typeMap[fillFigmaType] else {
-                throw DecodingError.typeMismatch(
-                    Self.self,
-                    DecodingError.Context(
-                        codingPath: decoder.codingPath,
-                        debugDescription: "Unknown fill type: \(fillFigmaType)"
-                    )
-                )
-            }
-            paints.append(try fillDecoder.decode(fillType))
-        }
-        return paints
+        return try decodePolyType(from: decoder, keyedBy: Paint.CodingKeys.self, key: .type, typeMap: Paint.typeMap)
     }
     
     static let typeMap: [FigmaType: Paint.Type] = [
