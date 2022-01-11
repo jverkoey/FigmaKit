@@ -6,25 +6,98 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>import FigmaKit
+			<string>import CoreText
+import FigmaKit
+import Foundation
+import PlaygroundSupport
+import UIKit
+
+PlaygroundPage.current.needsIndefiniteExecution = true
+
+func getDocumentsDirectory() -&gt; URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
+let url = URL(string: "http://fonts.gstatic.com/s/sourcesanspro/v18/6xK3dSBYKcSV-LCoeQqfX1RYOo3aP6TkmDZz9g.ttf")!
+let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+    guard let data = data else { return }
+    let ttfPath = getDocumentsDirectory().appendingPathComponent("font.ttf")
+    try! data.write(to: ttfPath)
+    let success = CTFontManagerRegisterFontsForURL(ttfPath as CFURL, .process, nil)
+}
+task.resume()
+
+let fileData = """
+    {"document":{"id":"0:0","name":"Document","type":"DOCUMENT","children":[{"id":"0:1","name":"Page 1","type":"CANVAS","children":[{"id":"2:2","name":"Rectangle 1","type":"RECTANGLE","blendMode":"PASS_THROUGH","absoluteBoundingBox":{"x":-121.0,"y":-202.0,"width":334.0,"height":139.0},"constraints":{"vertical":"TOP","horizontal":"LEFT"},"relativeTransform":[[1.0,0.0,-121.0],[0.0,1.0,-202.0]],"size":{"x":334.0,"y":139.0},"fills":[{"blendMode":"NORMAL","type":"SOLID","color":{"r":0.0,"g":0.33999991416931152,"b":1.0,"a":1.0}}],"fillGeometry":[{"path":"M0 0L334 0L334 139L0 139L0 0Z","windingRule":"NONZERO"}],"strokes":[],"strokeWeight":1.0,"strokeAlign":"INSIDE","strokeGeometry":[],"effects":[]},{"id":"3:3","name":"Hello world","type":"TEXT","blendMode":"PASS_THROUGH","absoluteBoundingBox":{"x":-49.0,"y":-154.0,"width":145.0,"height":38.0},"constraints":{"vertical":"TOP","horizontal":"LEFT"},"relativeTransform":[[1.0,0.0,-49.0],[0.0,1.0,-154.0]],"size":{"x":145.0,"y":38.0},"fills":[{"blendMode":"NORMAL","type":"SOLID","color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0}}],"strokes":[],"strokeWeight":1.0,"strokeAlign":"OUTSIDE","strokeGeometry":[],"effects":[],"characters":"Hello world","style":{"fontFamily":"Source Sans Pro","fontPostScriptName":"SourceSansPro-Regular","fontWeight":400,"textAutoResize":"WIDTH_AND_HEIGHT","fontSize":30.0,"textAlignHorizontal":"LEFT","textAlignVertical":"TOP","letterSpacing":0.0,"lineHeightPx":35.156250,"lineHeightPercent":100.0,"lineHeightUnit":"INTRINSIC_%"},"layoutVersion":3,"characterStyleOverrides":[],"styleOverrideTable":{}}],"backgroundColor":{"r":0.89803922176361084,"g":0.89803922176361084,"b":0.89803922176361084,"a":1.0},"prototypeStartNodeID":null,"flowStartingPoints":[],"prototypeDevice":{"type":"NONE","rotation":"NONE"}}]},"components":{},"componentSets":{},"schemaVersion":0,"styles":{},"name":"Untitled","lastModified":"2022-01-09T00:08:04Z","thumbnailUrl":"https://s3-alpha-sig.figma.com/thumbnails/3e8540f7-7e8d-4bcb-9183-ac2b9bf5c691?Expires=1642377600&amp;Signature=UKUNWKXkfZIHRGkiyoZUb0PXLZtIeq1zy4rWleaYgIrq-SmcgHA23L1EHyqfqTYxqhowADnx3PFzBZIuUKGFg85UHAvmTj2ksbps82RzJjev9O2DxyxU0pJ3~oSTrn7bG~Fv~BuRfaRAjN7V3ZiWgJmvufF-bbWEeKQ4yKAp2HHNbxz0ZAs0AhncYHAq9igC2iawJkzzMXnPN6sdXNdD1FXkLbG8wmLIkkmY063iGFNYzAcWhSk526oXnlCkO5BPSNsmfD4nr2HBTBlzSAJ2fUCy9n4DnT3fat--kWPo-RFuCVqJgJHn1rLgCDetBAx8O14OdbT68u0jsA8XQq27HQ__&amp;Key-Pair-Id=APKAINTVSUGEWH5XD5UA","version":"1439652218","role":"owner","editorType":"figma","linkAccess":"view"}
+    """
+
+let data = fileData.data(using: .utf8)!
+let decoder = JSONDecoder()
+let file = try! decoder.decode(FigmaKit.File.self, from: data)
+print(file)
+
+let page = file.document.children[0] as! Node.Canvas
+
+let canvas = UIScrollView()
+canvas.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
+canvas.backgroundColor = UIColor(figmaColor: page.backgroundColor)
+var boundingRect = CGRect.zero
+for node in page.children {
+    switch node {
+    case let vector as Node.Vector:
+        let frame = CGRect(figmaRect: vector.absoluteBoundingBox)
+        boundingRect = boundingRect.union(frame)
+        
+        let view: UIView
+        if node is Node.Rectangle {
+            view = UIView()
+            for fill in vector.fills {
+                switch fill {
+                case let solid as Paint.Solid:
+                    view.backgroundColor = UIColor(figmaColor: solid.color)
+                default:
+                    fatalError("Unhandled")
+                }
+            }
+        } else if let textNode = node as? Node.Text {
+            let label = UILabel()
+            print(textNode)
+            label.font = UIFont(name: textNode.style.fontFamily, size: textNode.style.fontSize)
+            for fill in vector.fills {
+                switch fill {
+                case let solid as Paint.Solid:
+                    label.textColor = UIColor(figmaColor: solid.color)
+                default:
+                    fatalError("Unhandled")
+                }
+            }
+            label.text = textNode.characters
+            view = label
+        } else {
+            fatalError("Unhandled type")
+        }
+        view.bounds = CGRect(origin: .zero, size: CGSize(figmaSize: vector.size))
+        view.transform = CGAffineTransform(figmaTransform: vector.relativeTransform, size: vector.size)
+        canvas.addSubview(view)
+    default:
+        fatalError("Unhandled")
+    }
+}
+print(boundingRect)
+//boundingRect = boundingRect.insetBy(dx: -1000, dy: -1000)
+canvas.contentInset = UIEdgeInsets(top: -boundingRect.minY, left: -boundingRect.minX, bottom: 0, right: 0)
+canvas.contentSize = boundingRect.size
+
+PlaygroundPage.current.liveView = canvas
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 16}</string>
+			<string>{0, 5399}</string>
 			<key>OriginalContent</key>
-			<string></string>
-			<key>OriginalRange</key>
-			<string>{0, 0}</string>
-		</dict>
-		<dict>
-			<key>ModifiedContent</key>
-			<string>Figma.hello()
+			<string>
 </string>
-			<key>ModifiedRange</key>
-			<string>{17, 14}</string>
-			<key>OriginalContent</key>
-			<string></string>
 			<key>OriginalRange</key>
-			<string>{1, 0}</string>
+			<string>{0, 1}</string>
 		</dict>
 	</array>
 	<key>FormatVersion</key>
