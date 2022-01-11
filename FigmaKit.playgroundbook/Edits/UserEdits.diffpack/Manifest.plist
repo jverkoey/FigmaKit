@@ -22,17 +22,35 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Color.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/File.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Canvas.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Document.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Rectangle.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Text.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Vector.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Paint.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/PolymorphicDecodable.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Rectangle.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/String+indented.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Transform.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Vector.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/ColorTests.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/FileTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/PaintTests.swift</key>
 		<string>Added</string>
