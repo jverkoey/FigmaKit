@@ -27,10 +27,9 @@ protocol PolymorphicDecodable: Decodable {
 }
 
 extension PolymorphicDecodable {
-    /// Decodes an array of Paint types from an unkeyed container.
+    /// Decodes an array of polymorphic types from an unkeyed container.
     ///
-    /// The returned array's values will be instances of the corresponding type of
-    /// paint.
+    /// The returned array's values will have the corresponding types that were defined in the typeMap.
     public static func decodePolyType<NestedKey: CodingKey, EncodedType: Decodable>(
         from decoder: UnkeyedDecodingContainer,
         keyedBy codingKeys: NestedKey.Type,
@@ -58,3 +57,4 @@ extension PolymorphicDecodable {
         return items
     }
 }
+Pu
