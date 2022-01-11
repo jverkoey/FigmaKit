@@ -34,7 +34,6 @@ public final class FileTests: XCTestCase {
         XCTAssertEqual(file.linkAccess, .view)
         XCTAssertEqual(file.document.id, "0:0")
         XCTAssertEqual(file.document.name, "Document")
-        XCTAssertTrue(file.document is Node.Document)
         XCTAssertTrue(file.document.children.isEmpty)
     }
     
@@ -167,7 +166,7 @@ public final class FileTests: XCTestCase {
         XCTAssertEqual(rect.absoluteBoundingBox.width, 334)
         XCTAssertEqual(rect.absoluteBoundingBox.height, 139)
         XCTAssertEqual(rect.relativeTransform.row1, [1, 0, -121])
-        XCTAssertEqual(rect.relativeTransform.row2, [0, 1, 202])
+        XCTAssertEqual(rect.relativeTransform.row2, [0, 1, -202])
         XCTAssertEqual(rect.size.x, 334)
         XCTAssertEqual(rect.size.y, 139)
         XCTAssertTrue(rect.children.isEmpty)
