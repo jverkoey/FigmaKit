@@ -5,6 +5,7 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     public let children: [Node]
     
     public enum FigmaType: String, Codable {
+        case booleanOperation = "BOOLEAN_OPERATION"
         case canvas = "CANVAS"
         case component = "COMPONENT"
         case componentSet = "COMPONENT_SET"
@@ -18,6 +19,7 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     }
     
     static let typeMap: [FigmaType: Node.Type] = [
+        .booleanOperation: BooleanOperation.self,
         .canvas: Canvas.self,
         .component: Component.self,
         .componentSet: ComponentSet.self,
