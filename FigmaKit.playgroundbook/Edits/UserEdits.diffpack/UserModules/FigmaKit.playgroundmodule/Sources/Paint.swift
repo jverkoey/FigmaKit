@@ -6,8 +6,22 @@
 /// https://www.figma.com/developers/api#paint-type
 public class Paint: PolymorphicDecodable, CustomStringConvertible {
     public let type: FigmaType
-    public let visible: Bool = true
-    public let opacity: Double = 1
+    public let visible: Bool
+    public let opacity: Double
+    
+    private enum CodingKeys: String, CodingKey {
+        case type
+        case visible
+        case opacity
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let keyedDecoder = try decoder.container(keyedBy: Self.CodingKeys)
+        
+        self.type = try keyedDecoder.decode(FigmaType.self, forKey: .type)
+        self.visible = try keyedDecoder.decodeIfPresent(Bool.self, forKey: .visible) ?? true
+        self.opacity = try keyedDecoder.decodeIfPresent(Double.self, forKey: .opacity) ?? 1
+    }
     
     /// Decodes an array of Paint types from an unkeyed container.
     ///
