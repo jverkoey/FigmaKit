@@ -1,4 +1,4 @@
 extension Node {
-    public final class Frame: Vector {
+    public class Frame: Vector {
     }
 }

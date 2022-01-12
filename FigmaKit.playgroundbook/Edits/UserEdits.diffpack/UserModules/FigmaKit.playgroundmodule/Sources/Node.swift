@@ -6,8 +6,12 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     
     public enum FigmaType: String, Codable {
         case canvas = "CANVAS"
+        case component = "COMPONENT"
+        case componentSet = "COMPONENT_SET"
         case document = "DOCUMENT"
         case frame = "FRAME"
+        case group = "GROUP"
+        case instance = "INSTANCE"
         case rectangle = "RECTANGLE"
         case text = "TEXT"
         case vector = "VECTOR"
@@ -15,8 +19,12 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     
     static let typeMap: [FigmaType: Node.Type] = [
         .canvas: Canvas.self,
+        .component: Component.self,
+        .componentSet: ComponentSet.self,
         .document: Document.self,
         .frame: Frame.self,
+        .group: Group.self,
+        .instance: Instance.self,
         .rectangle: Rectangle.self,
         .text: Text.self,
         .vector: Vector.self,

@@ -26,9 +26,17 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Canvas.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Component.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-ComponentSet.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Document.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Frame.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Group.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Instance.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Rectangle.swift</key>
 		<string>Added</string>

@@ -75,5 +75,63 @@ extension Paint {
     
     /// A Figma image paint.
     public class Image: Paint {
+        /// The scaling mode to use for the image.
+        public let scaleMode: ScaleMode
+        /// Affine transform applied to the image, only present if scaleMode is .stretch.
+        public let imageTransform: Transform?
+        /// Amount image is scaled by in tiling, only present if scaleMode is .tile.
+        public let scalingFactor: Double?
+        /// Image rotation, in degrees.
+        public let rotation: Double
+        /// A reference to an image embedded in this node.
+        ///
+        /// To download the image using this reference, use the GET file images endpoint
+        /// to retrieve the mapping from image references to image URLs.
+        public let imageRef: String
+        /// A reference to the GIF embedded in this node, if the image is a GIF.
+        ///
+        /// To download the image using this reference, use the GET file images endpoint
+        /// to retrieve the mapping from image references to image URLs.
+        public let gifRef: String?
+        
+        public enum ScaleMode: String, Codable {
+            case fill = "FILL"
+            case fit = "FIT"
+            case tile = "TILE"
+            case stretch = "STRETCH"
+        }
+        
+        private enum CodingKeys: String, CodingKey {
+            case scaleMode
+            case imageTransform
+            case scalingFactor
+            case rotation
+            case imageRef
+            case gifRef
+        }
+        
+        public required init(from decoder: Decoder) throws {
+            let keyedDecoder = try decoder.container(keyedBy: Self.CodingKeys)
+            
+            self.scaleMode = try keyedDecoder.decode(ScaleMode.self, forKey: .scaleMode)
+            self.imageTransform = try keyedDecoder.decodeIfPresent(Transform.self, forKey: .imageTransform)
+            self.scalingFactor = try keyedDecoder.decodeIfPresent(Double.self, forKey: .scalingFactor)
+            self.rotation = try keyedDecoder.decodeIfPresent(Double.self, forKey: .rotation) ?? 0
+            self.imageRef = try keyedDecoder.decode(String.self, forKey: .imageRef)
+            self.gifRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .gifRef)
+            
+            try super.init(from: decoder)
+        }
+        
+        override var paintDescription: String {
+            return """
+                - scaleMode: \(scaleMode)
+                - imageTransform: \(imageTransform)
+                - scalingFactor: \(scalingFactor)
+                - rotation: \(rotation)
+                - imageRef: \(imageRef)
+                - gifRef: \(gifRef)
+                """
+        }
     }
 }
