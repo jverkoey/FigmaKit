@@ -20,6 +20,11 @@ public class Paint: PolymorphicDecodable, CustomStringConvertible {
     static let typeMap: [FigmaType: Paint.Type] = [
         .solid: Solid.self,
         .image: Image.self,
+        .linearGradient: Gradient.self,
+        .radialGradient: Gradient.self,
+        .angularGradient: Gradient.self,
+        .diamondGradient: Gradient.self,
+        .emoji: Emoji.self,
     ]
     
     public enum FigmaType: String, Codable {
@@ -50,7 +55,7 @@ public class Paint: PolymorphicDecodable, CustomStringConvertible {
 
 extension Paint {
     /// A Figma solid fill paint.
-    public class Solid: Paint {
+    public final class Solid: Paint {
         /// The fill's color.
         public let color: Color
         
@@ -74,7 +79,7 @@ extension Paint {
     }
     
     /// A Figma image paint.
-    public class Image: Paint {
+    public final class Image: Paint {
         /// The scaling mode to use for the image.
         public let scaleMode: ScaleMode
         /// Affine transform applied to the image, only present if scaleMode is .stretch.
@@ -133,5 +138,13 @@ extension Paint {
                 - gifRef: \(gifRef)
                 """
         }
+    }
+    
+    /// A Figma gradient.
+    public final class Gradient: Paint {
+    }
+    
+    /// A Figma gradient.
+    public final class Emoji: Paint {
     }
 }
