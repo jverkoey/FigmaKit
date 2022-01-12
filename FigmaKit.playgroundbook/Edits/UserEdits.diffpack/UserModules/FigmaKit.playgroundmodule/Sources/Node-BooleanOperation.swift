@@ -1,6 +1,6 @@
 extension Node {
     public final class BooleanOperation: Vector {
-        let operation: Operation
+        let booleanOperation: Operation
         enum Operation: String, Decodable {
             case union = "UNION"
             case intersect = "INTERSECT"
@@ -9,13 +9,13 @@ extension Node {
         }
         
         private enum CodingKeys: String, CodingKey {
-            case operation
+            case booleanOperation
         }
         
         public required init(from decoder: Decoder) throws {
             let keyedDecoder = try decoder.container(keyedBy: Self.CodingKeys)
             
-            self.operation = try keyedDecoder.decode(Operation.self, forKey: .operation)
+            self.booleanOperation = try keyedDecoder.decode(Operation.self, forKey: .booleanOperation)
             
             try super.init(from: decoder)
         }
@@ -26,7 +26,7 @@ extension Node {
         
         override var contentDescription: String {
             return """
-                - operation: \(operation)
+                - booleanOperation: \(booleanOperation)
                 """
         }
     }
