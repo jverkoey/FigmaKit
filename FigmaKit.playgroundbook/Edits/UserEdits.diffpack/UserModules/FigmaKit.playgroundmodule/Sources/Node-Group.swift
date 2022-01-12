@@ -1,4 +1,4 @@
 extension Node {
-    public final class Group: Vector {
+    public final class Group: Frame {
     }
 }

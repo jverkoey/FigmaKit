@@ -19,6 +19,7 @@ extension Node {
         
         override var contentDescription: String {
             return super.contentDescription + """
+                
                 - characters: \(characters)
                 - style: \(style)
                 """
@@ -28,6 +29,5 @@ extension Node {
             public let fontFamily: String
             public let fontSize: Double
         }
-        
     }
 }
