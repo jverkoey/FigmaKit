@@ -27,6 +27,7 @@
         $0.testDecodeEmptyDocument,
         $0.testDecodeDocumentWithOnePage,
         $0.testDecodeDocumentWithOneFrame,
+        $0.testDecodeSmallFile
     ]}),
     TestCase(PaintTests(), tests: {[
         $0.testDecoding
@@ -43,7 +44,7 @@
 ])
 </string>
 			<key>ModifiedRange</key>
-			<string>{22, 551}</string>
+			<string>{22, 582}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>

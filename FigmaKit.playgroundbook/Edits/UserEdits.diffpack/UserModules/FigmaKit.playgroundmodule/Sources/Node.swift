@@ -5,17 +5,21 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     public let children: [Node]
     
     public enum FigmaType: String, Codable {
-        case document = "DOCUMENT"
-        case rectangle = "RECTANGLE"
         case canvas = "CANVAS"
+        case document = "DOCUMENT"
+        case frame = "FRAME"
+        case rectangle = "RECTANGLE"
         case text = "TEXT"
+        case vector = "VECTOR"
     }
     
     static let typeMap: [FigmaType: Node.Type] = [
-        .document: Document.self,
         .canvas: Canvas.self,
+        .document: Document.self,
+        .frame: Frame.self,
         .rectangle: Rectangle.self,
-        .text: Text.self
+        .text: Text.self,
+        .vector: Vector.self,
     ]
     
     private enum CodingKeys: String, CodingKey {

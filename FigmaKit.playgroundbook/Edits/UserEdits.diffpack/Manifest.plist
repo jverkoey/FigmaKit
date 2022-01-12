@@ -28,6 +28,8 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Document.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Frame.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Rectangle.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Node-Text.swift</key>

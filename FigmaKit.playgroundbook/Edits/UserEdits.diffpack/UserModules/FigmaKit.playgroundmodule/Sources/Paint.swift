@@ -19,6 +19,7 @@ public class Paint: PolymorphicDecodable, CustomStringConvertible {
     
     static let typeMap: [FigmaType: Paint.Type] = [
         .solid: Solid.self,
+        .image: Image.self,
     ]
     
     public enum FigmaType: String, Codable {
@@ -70,5 +71,9 @@ extension Paint {
                 - color: \(color)
                 """
         }
+    }
+    
+    /// A Figma image paint.
+    public class Image: Paint {
     }
 }
