@@ -9,7 +9,7 @@ public enum Hyperlink: Codable {
     private enum CodingKeys: String, CodingKey {
         case type
         case url
-        case node
+        case nodeID
     }
     
     public init(from decoder: Decoder) throws {
@@ -20,7 +20,7 @@ public enum Hyperlink: Codable {
         case .url:
             self = .url(try container.decode(String.self, forKey: .url))
         case .node:
-            self = .node(try container.decode(String.self, forKey: .node))
+            self = .node(try container.decode(String.self, forKey: .nodeID))
         }
     }
     
