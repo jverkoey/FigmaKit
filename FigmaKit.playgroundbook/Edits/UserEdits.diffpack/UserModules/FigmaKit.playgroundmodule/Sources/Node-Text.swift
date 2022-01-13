@@ -27,7 +27,7 @@ extension Node {
             self.characters = try keyedDecoder.decode(String.self, forKey: .characters)
             self.style = try keyedDecoder.decode(TypeStyle.self, forKey: .style)
             self.characterStyleOverrides = try keyedDecoder.decode([Int].self, forKey: .characterStyleOverrides)
-            self.styleOverrideTable = try keyedDecoder.decode([Int: Style].self, forKey: .styleOverrideTable)
+            self.styleOverrideTable = try keyedDecoder.decodeIfPresent([Int: Style].self, forKey: .styleOverrideTable) ?? [:]
             
             try super.init(from: decoder)
         }
