@@ -11,7 +11,7 @@ private struct TestObject: Decodable {
     
     init(from decoder: Decoder) throws { 
         let container = try decoder.container(keyedBy: Self.CodingKeys)
-        self.paints = try Paint.decode(from: container.nestedUnkeyedContainer(forKey: .paints))
+        self.paints = try Paint.decodePolymorphicArray(from: container.nestedUnkeyedContainer(forKey: .paints))
     }
 }
 

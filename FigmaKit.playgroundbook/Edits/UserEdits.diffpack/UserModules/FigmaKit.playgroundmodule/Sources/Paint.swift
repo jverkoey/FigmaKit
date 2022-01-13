@@ -4,7 +4,7 @@
 /// "A solid color, gradient, or image texture that can be applied as
 /// fills or strokes."
 /// https://www.figma.com/developers/api#paint-type
-public class Paint: PolymorphicDecodable, CustomStringConvertible {
+public class Paint: Codable, PolymorphicDecodable, CustomStringConvertible {
     public let type: FigmaType
     public let visible: Bool
     public let opacity: Double
@@ -27,7 +27,7 @@ public class Paint: PolymorphicDecodable, CustomStringConvertible {
     ///
     /// The returned array's values will be instances of the corresponding type of
     /// paint.
-    public static func decode(from decoder: UnkeyedDecodingContainer) throws -> [Paint] {
+    public static func decodePolymorphicArray(from decoder: UnkeyedDecodingContainer) throws -> [Paint] {
         return try decodePolyType(from: decoder, keyedBy: Paint.CodingKeys.self, key: .type, typeMap: Paint.typeMap)
     }
     
@@ -91,7 +91,9 @@ extension Paint {
                 """
         }
     }
-    
+}
+
+extension Paint {
     /// A Figma image paint.
     public final class Image: Paint {
         /// The scaling mode to use for the image.
