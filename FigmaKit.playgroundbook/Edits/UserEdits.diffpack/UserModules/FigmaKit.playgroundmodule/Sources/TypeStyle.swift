@@ -8,11 +8,11 @@ public struct TypeStyle: Codable {
     /// Paints applied to characters.
     public let fills: [Paint]
     /// Font family of text (standard name).
-    public let fontFamily: String?
+    public let fontFamily: String
     /// Numeric font weight.
-    public let fontWeight: Double?
+    public let fontWeight: Double
     /// PostScript font name
-    public let fontPostScriptName: String?
+    public let fontPostScriptName: String
     /// Font size in px.
     public let fontSize: Double
     /// Link to a URL or frame.
@@ -56,9 +56,9 @@ public struct TypeStyle: Codable {
         } else {
             self.fills = []
         }
-        self.fontFamily = try container.decodeIfPresent(String.self, forKey: .fontFamily)
-        self.fontWeight = try container.decodeIfPresent(Double.self, forKey: .fontWeight)
-        self.fontPostScriptName = try container.decodeIfPresent(String.self, forKey: .fontPostScriptName)
+        self.fontFamily = try container.decode(String.self, forKey: .fontFamily)
+        self.fontWeight = try container.decode(Double.self, forKey: .fontWeight)
+        self.fontPostScriptName = try container.decode(String.self, forKey: .fontPostScriptName)
         self.fontSize = try container.decode(Double.self, forKey: .fontSize)
         self.hyperlink = try container.decodeIfPresent(Hyperlink.self, forKey: .hyperlink)
         self.letterSpacing = try container.decode(Double.self, forKey: .letterSpacing)

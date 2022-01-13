@@ -98,6 +98,8 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/TypeStyle.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/TypeStyleOverride.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Vector.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/ColorTests.swift</key>
