@@ -19,7 +19,6 @@ let package = Package(
   name: "FigmaKit",
   platforms: [
     .iOS("15.0"),
-    .linux,
   ],
   products: [
     .library(
