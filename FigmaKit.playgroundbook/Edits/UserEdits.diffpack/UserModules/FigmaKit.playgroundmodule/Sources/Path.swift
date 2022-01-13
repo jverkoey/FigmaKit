@@ -1,3 +1,5 @@
+import Foundation
+
 /// A Figma path.
 ///
 /// "A series of path commands that encodes how to draw the path."
@@ -29,5 +31,93 @@ public struct Path: Codable {
         case evenOdd = "EVENODD"
         /// An open path won’t have a fill.
         case none = "NONE"
+    }
+    
+    public enum Command {
+        case moveTo(x: Double, y: Double)
+        case lineTo(x: Double, y: Double)
+        case splineTo(x0: Double, y0: Double, x1: Double, y1: Double, x: Double, y: Double)
+        case close
+    }
+    
+    /// Returns a parsed representation of the Figma path string.
+    public func commands() -> [Command] {
+        let scanner = Scanner(string: path)
+        
+        var commands: [Command] = []
+        while !scanner.isAtEnd {
+            let commandCode = scanner.scanCharacter()
+            
+            switch commandCode {
+            case "M":
+                guard let x = scanner.scanDouble(),
+                      let y = scanner.scanDouble() else {
+                    fatalError("Malformed command")
+                }
+                commands.append(.moveTo(x: x, y: y))
+            case "L":
+                guard let x = scanner.scanDouble(),
+                      let y = scanner.scanDouble() else {
+                    fatalError("Malformed command")
+                }
+                commands.append(.lineTo(x: x, y: y))
+            case "C":
+                guard let x0 = scanner.scanDouble(),
+                      let y0 = scanner.scanDouble(),
+                      let x1 = scanner.scanDouble(),
+                      let y1 = scanner.scanDouble(),
+                      let x = scanner.scanDouble(),
+                      let y = scanner.scanDouble() else {
+                    fatalError("Malformed command")
+                }
+                commands.append(.splineTo(x0: x0, y0: y0, x1: x1, y1: y1, x: x, y: y))
+            case "Z":
+                commands.append(.close)
+            default:
+                fatalError("Not implemented: \(commandCode)")
+            }
+        }
+        return commands
+    }
+    
+    /// Returns a parsed representation of the Figma path string, where the given offset has been added to every point.
+    public func commands(offsetBy offset: (x: Double, y: Double)) -> [Command] {
+        return commands().map { command in
+            switch command {
+            case let .moveTo(x, y):
+                return .moveTo(x: x + offset.x, y: y + offset.y)
+            case let .lineTo(x, y):
+                return .lineTo(x: x + offset.x, y: y + offset.y)
+            case let .splineTo(x0, y0, x1, y1, x, y):
+                return .splineTo(
+                    x0: x0 + offset.x, y0: y0 + offset.y,
+                    x1: x1 + offset.x, y1: y1 + offset.y,
+                    x: x + offset.x, y: y + offset.y
+                )
+            case .close:
+                return .close
+            }
+        }
+    }
+    
+    /// Returns the bounds of all points in the commands.
+    public func bounds() -> (minX: Double, minY: Double, maxX: Double, maxY: Double)? {
+        var bounds: (minX: Double, minY: Double, maxX: Double, maxY: Double)? = nil
+        for command in commands() {
+            switch command {
+            case let .moveTo(x, y),
+                 let .lineTo(x, y),
+                 let .splineTo(_, _, _, _, x, y):
+                if let oldBounds = bounds {
+                    bounds = (min(oldBounds.minX, x), min(oldBounds.minY, y),
+                              max(oldBounds.maxX, x), max(oldBounds.maxY, y))
+                } else {
+                    bounds = (x, y, x, y)
+                }
+            case .close:
+                break
+            }
+        }
+        return bounds
     }
 }

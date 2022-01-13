@@ -35,6 +35,9 @@
     TestCase(PaintTests(), tests: {[
         $0.testDecoding
     ]}),
+    TestCase(PathTests(), tests: {[
+        $0.testDecoding,
+    ]}),
     TestCase(RectangleTests(), tests: {[
         $0.testDecoding
     ]}),
@@ -47,7 +50,7 @@
 ])
 </string>
 			<key>ModifiedRange</key>
-			<string>{22, 674}</string>
+			<string>{22, 744}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>

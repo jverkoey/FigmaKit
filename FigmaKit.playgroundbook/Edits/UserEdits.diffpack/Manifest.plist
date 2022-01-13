@@ -14,6 +14,10 @@
 		<string>Added</string>
 		<key>Chapters/Chapter1.playgroundchapter/Pages/8AA54844-AF73-49A3-8501-BD135BCA5FA5.playgroundpage/main.swift</key>
 		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/A5CB2E69-203F-4ECD-B600-E89477CD909D.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/A5CB2E69-203F-4ECD-B600-E89477CD909D.playgroundpage/main.swift</key>
+		<string>Modified</string>
 		<key>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/UserManifest.plist</key>
 		<string>Added</string>
 		<key>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</key>
@@ -109,6 +113,8 @@
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/Node-DocumentTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/PaintTests.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/PathTests.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKitTests.playgroundmodule/Sources/RectangleTests.swift</key>
 		<string>Added</string>
