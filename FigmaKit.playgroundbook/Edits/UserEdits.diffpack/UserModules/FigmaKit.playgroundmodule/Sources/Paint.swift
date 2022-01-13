@@ -109,12 +109,12 @@ extension Paint {
         ///
         /// To download the image using this reference, use the GET file images endpoint
         /// to retrieve the mapping from image references to image URLs.
-        public let ref: String
+        public let ref: String?
         public enum ReferenceType {
             case image
             case gif
         }
-        public let refType: ReferenceType
+        public let refType: ReferenceType?
         
         public enum ScaleMode: String, Codable {
             case fill = "FILL"
@@ -146,13 +146,8 @@ extension Paint {
                 self.ref = gifRef
                 self.refType = .gif
             } else {
-                throw DecodingError.typeMismatch(
-                    Self.self,
-                    DecodingError.Context(
-                        codingPath: decoder.codingPath,
-                        debugDescription: "Unknown image type."
-                    )
-                )
+                self.ref = nil
+                self.refType = nil
             }
             
             try super.init(from: decoder)
