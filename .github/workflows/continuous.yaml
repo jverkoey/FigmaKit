@@ -23,15 +23,6 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: fwal/setup-swift@v1
-      - name: Get swift version
-        run: swift --version
-      - uses: actions/checkout@v2
-      - name: Build
-        run: swift build
-      - name: Run tests
-        run: swift test
-
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
@@ -46,3 +37,12 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+
+      - uses: fwal/setup-swift@v1
+      - name: Get swift version
+        run: swift --version
+      - uses: actions/checkout@v2
+      - name: Build
+        run: swift build
+      - name: Run tests
+        run: swift test
