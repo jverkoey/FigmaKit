@@ -8,7 +8,7 @@ public struct TypeStyle: Codable {
     /// Paints applied to characters.
     public let fills: [Paint]
     /// Font family of text (standard name).
-    public let fontFamily: String
+    public let fontFamily: String?
     /// Numeric font weight.
     public let fontWeight: Double
     /// PostScript font name
@@ -56,7 +56,7 @@ public struct TypeStyle: Codable {
         } else {
             self.fills = []
         }
-        self.fontFamily = try container.decode(String.self, forKey: .fontFamily)
+        self.fontFamily = try container.decodeIfPresent(String.self, forKey: .fontFamily)
         self.fontWeight = try container.decode(Double.self, forKey: .fontWeight)
         self.fontPostScriptName = try container.decode(String.self, forKey: .fontPostScriptName)
         self.fontSize = try container.decode(Double.self, forKey: .fontSize)
