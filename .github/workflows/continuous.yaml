@@ -38,6 +38,7 @@ jobs:
 
   test:
     runs-on: macos-latest
+    steps:
       - uses: fwal/setup-swift@v1
       - name: Get swift version
         run: swift --version
