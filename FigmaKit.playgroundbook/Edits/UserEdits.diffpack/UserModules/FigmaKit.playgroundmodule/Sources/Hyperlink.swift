@@ -15,12 +15,17 @@ public enum Hyperlink: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Self.CodingKeys)
         
-        let type = try container.decode(HyperlinkType.self, forKey: .type)
-        switch type {
-        case .url:
-            self = .url(try container.decode(String.self, forKey: .url))
-        case .node:
-            self = .node(try container.decode(String.self, forKey: .nodeID))
+        do {
+            let type = try container.decode(HyperlinkType.self, forKey: .type)
+            switch type {
+            case .url:
+                self = .url(try container.decode(String.self, forKey: .url))
+            case .node:
+                self = .node(try container.decode(String.self, forKey: .nodeID))
+            }
+        } catch let error {
+            print("Failed to parse hyperlink. Keys in this container: \(container.allKeys)")
+            throw error
         }
     }
     
