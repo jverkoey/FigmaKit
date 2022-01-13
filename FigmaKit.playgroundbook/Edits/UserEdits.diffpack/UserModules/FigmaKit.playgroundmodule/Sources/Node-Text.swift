@@ -12,7 +12,7 @@ extension Node {
         /// Elements with value 0 have the default type style.
         public let characterStyleOverrides: [Int]
         /// Map from ID to TypeStyle for looking up style overrides.
-        public let styleOverrideTable: [Int: Style]
+        public let styleOverrideTable: [Int: TypeStyle]
         
         private enum CodingKeys: String, CodingKey {
             case characters
@@ -27,7 +27,7 @@ extension Node {
             self.characters = try keyedDecoder.decode(String.self, forKey: .characters)
             self.style = try keyedDecoder.decode(TypeStyle.self, forKey: .style)
             self.characterStyleOverrides = try keyedDecoder.decode([Int].self, forKey: .characterStyleOverrides)
-            self.styleOverrideTable = try keyedDecoder.decodeIfPresent([Int: Style].self, forKey: .styleOverrideTable) ?? [:]
+            self.styleOverrideTable = try keyedDecoder.decodeIfPresent([Int: TypeStyle].self, forKey: .styleOverrideTable) ?? [:]
             
             try super.init(from: decoder)
         }
