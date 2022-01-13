@@ -61,7 +61,7 @@ extension Node {
         /// A mapping of a StyleType to style ID of styles present on this node.
         ///
         /// The style ID can be used to look up more information about the style in the top-level styles field.
-        public let styles: [Style.StyleType: String]
+        public let styles: [String: String]
         /// The duration of the prototyping transition on this node (in milliseconds).
         public let transitionDuration: Double?
         /// The easing curve used in the prototyping transition on this node.
@@ -138,7 +138,7 @@ extension Node {
             self.strokeGeometry = try keyedDecoder.decodeIfPresent([Path].self, forKey: .strokeGeometry) ?? []
             self.strokeMiterAngle = try keyedDecoder.decodeIfPresent(Double.self, forKey: .strokeMiterAngle) ?? 28.96
             self.strokeWeight = try keyedDecoder.decode(Double.self, forKey: .strokeWeight)
-            self.styles = try keyedDecoder.decodeIfPresent([Style.StyleType: String].self, forKey: .styles) ?? [:]
+            self.styles = try keyedDecoder.decodeIfPresent([String: String].self, forKey: .styles) ?? [:]
             self.transitionDuration = try keyedDecoder.decodeIfPresent(Double.self, forKey: .transitionDuration)
             self.transitionEasing = try keyedDecoder.decodeIfPresent(EasingType.self, forKey: .transitionEasing)
             self.transitionNodeID = try keyedDecoder.decodeIfPresent(String.self, forKey: .transitionNodeID)
