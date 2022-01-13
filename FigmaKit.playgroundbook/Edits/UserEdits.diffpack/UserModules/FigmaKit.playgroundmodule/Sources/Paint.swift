@@ -104,16 +104,16 @@ extension Paint {
         public let scalingFactor: Double?
         /// Image rotation, in degrees.
         public let rotation: Double
+        
+        public enum Reference {
+            case image(String)
+            case gif(String)
+        }
         /// A reference to an image embedded in this node.
         ///
         /// To download the image using this reference, use the GET file images endpoint
         /// to retrieve the mapping from image references to image URLs.
-        public let imageRef: String
-        /// A reference to the GIF embedded in this node, if the image is a GIF.
-        ///
-        /// To download the image using this reference, use the GET file images endpoint
-        /// to retrieve the mapping from image references to image URLs.
-        public let gifRef: String?
+        public let ref: Reference
         
         public enum ScaleMode: String, Codable {
             case fill = "FILL"
@@ -138,8 +138,19 @@ extension Paint {
             self.imageTransform = try keyedDecoder.decodeIfPresent(Transform.self, forKey: .imageTransform)
             self.scalingFactor = try keyedDecoder.decodeIfPresent(Double.self, forKey: .scalingFactor)
             self.rotation = try keyedDecoder.decodeIfPresent(Double.self, forKey: .rotation) ?? 0
-            self.imageRef = try keyedDecoder.decode(String.self, forKey: .imageRef)
-            self.gifRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .gifRef)
+            if let imageRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .imageRef) {
+                self.ref = .image(imageRef)
+            } else if let gifRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .gifRef) {
+                self.ref = .gif(gifRef)
+            } else {
+                throw DecodingError.typeMismatch(
+                    Self.self,
+                    DecodingError.Context(
+                        codingPath: decoder.codingPath,
+                        debugDescription: "Unknown image type."
+                    )
+                )
+            }
             
             try super.init(from: decoder)
         }
@@ -150,8 +161,7 @@ extension Paint {
                 - imageTransform: \(imageTransform)
                 - scalingFactor: \(scalingFactor)
                 - rotation: \(rotation)
-                - imageRef: \(imageRef)
-                - gifRef: \(gifRef)
+                - ref: \(ref)
                 """
         }
     }
