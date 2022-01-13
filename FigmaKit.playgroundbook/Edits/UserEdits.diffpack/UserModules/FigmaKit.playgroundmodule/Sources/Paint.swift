@@ -105,15 +105,16 @@ extension Paint {
         /// Image rotation, in degrees.
         public let rotation: Double
         
-        public enum Reference {
-            case image(String)
-            case gif(String)
-        }
         /// A reference to an image embedded in this node.
         ///
         /// To download the image using this reference, use the GET file images endpoint
         /// to retrieve the mapping from image references to image URLs.
-        public let ref: Reference
+        public let ref: String
+        public enum ReferenceType {
+            case image
+            case gif
+        }
+        public let refType: ReferenceType
         
         public enum ScaleMode: String, Codable {
             case fill = "FILL"
@@ -139,9 +140,11 @@ extension Paint {
             self.scalingFactor = try keyedDecoder.decodeIfPresent(Double.self, forKey: .scalingFactor)
             self.rotation = try keyedDecoder.decodeIfPresent(Double.self, forKey: .rotation) ?? 0
             if let imageRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .imageRef) {
-                self.ref = .image(imageRef)
+                self.ref = imageRef
+                self.refType = .image
             } else if let gifRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .gifRef) {
-                self.ref = .gif(gifRef)
+                self.ref = gifRef
+                self.refType = .gif
             } else {
                 throw DecodingError.typeMismatch(
                     Self.self,
@@ -162,6 +165,7 @@ extension Paint {
                 - scalingFactor: \(scalingFactor)
                 - rotation: \(rotation)
                 - ref: \(ref)
+                - refType: \(refType)
                 """
         }
     }
