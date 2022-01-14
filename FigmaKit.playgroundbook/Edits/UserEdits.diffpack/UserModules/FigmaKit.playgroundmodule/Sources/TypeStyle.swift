@@ -12,10 +12,14 @@ public struct TypeStyle: Codable {
     /// Numeric font weight.
     public let fontWeight: Double
     /// PostScript font name
+    ///
+    /// Figma API does not document it, but this property is optional.
     public let fontPostScriptName: String?
     /// Font size in px.
     public let fontSize: Double
     /// Link to a URL or frame.
+    ///
+    /// Figma API does not document it, but this property is optional.
     public let hyperlink: Hyperlink?
     /// Space between characters in px.
     public let letterSpacing: Double
