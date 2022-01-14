@@ -10,7 +10,7 @@ public struct TypeStyle: Codable {
     /// Font family of text (standard name).
     public let fontFamily: String
     /// Numeric font weight.
-    public let fontWeight: Double
+    public let fontWeight: Int
     /// PostScript font name
     ///
     /// Figma API does not document it, but this property is optional.
@@ -61,7 +61,7 @@ public struct TypeStyle: Codable {
             self.fills = []
         }
         self.fontFamily = try container.decode(String.self, forKey: .fontFamily)
-        self.fontWeight = try container.decode(Double.self, forKey: .fontWeight)
+        self.fontWeight = try container.decode(Int.self, forKey: .fontWeight)
         self.fontPostScriptName = try container.decodeIfPresent(String.self, forKey: .fontPostScriptName)
         self.fontSize = try container.decode(Double.self, forKey: .fontSize)
         self.hyperlink = try container.decodeIfPresent(Hyperlink.self, forKey: .hyperlink)
