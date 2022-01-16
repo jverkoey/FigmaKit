@@ -7,7 +7,7 @@ public struct Style: Codable {
     public let key: String
     public let name: String
     public let description: String
-    public let type: StyleType
+    public let styleType: StyleType
     
     /// A Figma style type
     public enum StyleType: String, Codable {

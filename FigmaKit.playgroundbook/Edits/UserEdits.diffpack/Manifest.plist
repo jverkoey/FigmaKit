@@ -34,7 +34,13 @@
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Color.swift</key>
 		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/Component.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/ComponentSet.swift</key>
+		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/Constraint.swift</key>
+		<string>Added</string>
+		<key>UserModules/FigmaKit.playgroundmodule/Sources/DocumentationLink.swift</key>
 		<string>Added</string>
 		<key>UserModules/FigmaKit.playgroundmodule/Sources/EasingType.swift</key>
 		<string>Added</string>
