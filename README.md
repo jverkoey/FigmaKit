@@ -1,1 +1,7 @@
-WIP repo for working with the Figma API in Swift via Swift Playgrounds.
+# FigmaKit
+
+A Swift package for decoding Figma API responses.
+
+This library currently supports decoding the following Figma endpoints:
+
+- [GET file](https://www.figma.com/developers/api#files-endpoints)
