@@ -60,8 +60,11 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
   ///
   /// The returned array's values will be instances of the corresponding type of
   /// paint.
-  private static func decodePolymorphicArray(from decoder: UnkeyedDecodingContainer) throws -> [Node] {
-    return try decodePolyType(from: decoder, keyedBy: Node.CodingKeys.self, key: .type, typeMap: Node.typeMap)
+  private static func decodePolymorphicArray(from decoder: UnkeyedDecodingContainer) throws
+    -> [Node]
+  {
+    return try decodePolyType(
+      from: decoder, keyedBy: Node.CodingKeys.self, key: .type, typeMap: Node.typeMap)
   }
 
   public required init(from decoder: Decoder) throws {
@@ -86,16 +89,16 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
 
   public var debugDescription: String {
     return """
-            <\(Swift.type(of: self))
-            - id: \(id)
-            - name: \(name)
-            - visible: \(visible)
-            - type: \(type)
-            \(contentDescription.isEmpty ? "" : "\n" + contentDescription)
-            children:
-            \(children.debugDescription.indented(by: 2))
-            >
-            """
+      <\(Swift.type(of: self))
+      - id: \(id)
+      - name: \(name)
+      - visible: \(visible)
+      - type: \(type)
+      \(contentDescription.isEmpty ? "" : "\n" + contentDescription)
+      children:
+      \(children.debugDescription.indented(by: 2))
+      >
+      """
   }
 
   var contentDescription: String {
@@ -103,3 +106,12 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
   }
 }
 
+extension Node: Hashable {
+  public static func == (lhs: Node, rhs: Node) -> Bool {
+    return lhs.id == rhs.id
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+}
