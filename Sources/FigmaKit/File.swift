@@ -29,6 +29,7 @@ public final class File: Codable, CustomStringConvertible {
 
   public enum Role: String, Codable {
     case owner = "owner"
+    case editor = "editor"
   }
 
   public enum LinkAccess: String, Codable {
