@@ -101,7 +101,8 @@ extension Node {
     public required init(from decoder: Decoder) throws {
       let keyedDecoder = try decoder.container(keyedBy: Self.CodingKeys)
 
-      self.absoluteBoundingBox = try keyedDecoder.decode(FigmaKit.Rectangle.self, forKey: .absoluteBoundingBox)
+      self.absoluteBoundingBox = try keyedDecoder.decode(
+        FigmaKit.Rectangle.self, forKey: .absoluteBoundingBox)
       self.blendMode = try keyedDecoder.decode(BlendMode.self, forKey: .blendMode)
       self.constraints = try keyedDecoder.decode(LayoutConstraint.self, forKey: .constraints)
       if keyedDecoder.contains(.effects) {
@@ -110,7 +111,8 @@ extension Node {
       } else {
         self.effects = []
       }
-      self.exportSettings = try keyedDecoder.decodeIfPresent([ExportSetting].self, forKey: .exportSettings) ?? []
+      self.exportSettings =
+        try keyedDecoder.decodeIfPresent([ExportSetting].self, forKey: .exportSettings) ?? []
       self.fillGeometry = try keyedDecoder.decodeIfPresent([Path].self, forKey: .fillGeometry) ?? []
       if keyedDecoder.contains(.fills) {
         let fillsDecoder = try keyedDecoder.nestedUnkeyedContainer(forKey: .fills)
@@ -123,25 +125,33 @@ extension Node {
       self.layoutGrow = try keyedDecoder.decodeIfPresent(LayoutGrow.self, forKey: .layoutGrow)
       self.locked = try keyedDecoder.decodeIfPresent(Bool.self, forKey: .locked) ?? false
       self.opacity = try keyedDecoder.decodeIfPresent(Double.self, forKey: .opacity) ?? 1
-      self.preserveRatio = try keyedDecoder.decodeIfPresent(Bool.self, forKey: .preserveRatio) ?? false
+      self.preserveRatio =
+        try keyedDecoder.decodeIfPresent(Bool.self, forKey: .preserveRatio) ?? false
       self.relativeTransform = try keyedDecoder.decode(Transform.self, forKey: .relativeTransform)
       self.size = try keyedDecoder.decode(FigmaKit.Vector.self, forKey: .size)
       self.strokeCap = try keyedDecoder.decodeIfPresent(StrokeCap.self, forKey: .strokeCap) ?? .none
-      self.strokeDashes = try keyedDecoder.decodeIfPresent([Double].self, forKey: .strokeDashes) ?? []
-      self.strokeJoin = try keyedDecoder.decodeIfPresent(StrokeJoin.self, forKey: .strokeJoin) ?? .miter
+      self.strokeDashes =
+        try keyedDecoder.decodeIfPresent([Double].self, forKey: .strokeDashes) ?? []
+      self.strokeJoin =
+        try keyedDecoder.decodeIfPresent(StrokeJoin.self, forKey: .strokeJoin) ?? .miter
       if keyedDecoder.contains(.strokes) {
         let strokesDecoder = try keyedDecoder.nestedUnkeyedContainer(forKey: .strokes)
         self.strokes = try Paint.decodePolymorphicArray(from: strokesDecoder)
       } else {
         self.strokes = []
       }
-      self.strokeGeometry = try keyedDecoder.decodeIfPresent([Path].self, forKey: .strokeGeometry) ?? []
-      self.strokeMiterAngle = try keyedDecoder.decodeIfPresent(Double.self, forKey: .strokeMiterAngle) ?? 28.96
+      self.strokeGeometry =
+        try keyedDecoder.decodeIfPresent([Path].self, forKey: .strokeGeometry) ?? []
+      self.strokeMiterAngle =
+        try keyedDecoder.decodeIfPresent(Double.self, forKey: .strokeMiterAngle) ?? 28.96
       self.strokeWeight = try keyedDecoder.decode(Double.self, forKey: .strokeWeight)
       self.styles = try keyedDecoder.decodeIfPresent([String: String].self, forKey: .styles) ?? [:]
-      self.transitionDuration = try keyedDecoder.decodeIfPresent(Double.self, forKey: .transitionDuration)
-      self.transitionEasing = try keyedDecoder.decodeIfPresent(EasingType.self, forKey: .transitionEasing)
-      self.transitionNodeID = try keyedDecoder.decodeIfPresent(String.self, forKey: .transitionNodeID)
+      self.transitionDuration = try keyedDecoder.decodeIfPresent(
+        Double.self, forKey: .transitionDuration)
+      self.transitionEasing = try keyedDecoder.decodeIfPresent(
+        EasingType.self, forKey: .transitionEasing)
+      self.transitionNodeID = try keyedDecoder.decodeIfPresent(
+        String.self, forKey: .transitionNodeID)
 
       try super.init(from: decoder)
     }
@@ -161,37 +171,35 @@ extension Node {
 
     override var contentDescription: String {
       return """
-                - absoluteBoundingBox: \(absoluteBoundingBox)
-                - blendMode: \(blendMode)
-                - constraints: \(constraints)
-                - effects:
-                \(effects.description.indented(by: 2))
-                - exportSettings:
-                \(exportSettings.description.indented(by: 2))
-                - fillGeometry: \(fillGeometry)
-                - fills:
-                \(fills.description.indented(by: 2))
-                - layoutAlign: \(String(describing: layoutAlign))
-                - layoutGrow: \(String(describing: layoutGrow))
-                - locked: \(locked)
-                - opacity: \(opacity)
-                - preserveRatio: \(preserveRatio)
-                - relativeTransform: \(relativeTransform)
-                - size: \(size)
-                - strokeCap: \(strokeCap)
-                - strokeDashes: \(strokeDashes)
-                - strokeJoin: \(strokeJoin)
-                - strokes:
-                \(strokes.description.indented(by: 2))
-                - strokeGeometry: \(strokeGeometry)
-                - strokeMiterAngle: \(strokeMiterAngle)
-                - strokeWeight: \(strokeWeight)
-                - transitionDuration: \(String(describing: transitionDuration))
-                - transitionEasing: \(String(describing: transitionEasing))
-                - transitionNodeID: \(String(describing: transitionNodeID))
-                """
+        - absoluteBoundingBox: \(absoluteBoundingBox)
+        - blendMode: \(blendMode)
+        - constraints: \(constraints)
+        - effects:
+        \(effects.description.indented(by: 2))
+        - exportSettings:
+        \(exportSettings.description.indented(by: 2))
+        - fillGeometry: \(fillGeometry)
+        - fills:
+        \(fills.description.indented(by: 2))
+        - layoutAlign: \(String(describing: layoutAlign))
+        - layoutGrow: \(String(describing: layoutGrow))
+        - locked: \(locked)
+        - opacity: \(opacity)
+        - preserveRatio: \(preserveRatio)
+        - relativeTransform: \(relativeTransform)
+        - size: \(size)
+        - strokeCap: \(strokeCap)
+        - strokeDashes: \(strokeDashes)
+        - strokeJoin: \(strokeJoin)
+        - strokes:
+        \(strokes.description.indented(by: 2))
+        - strokeGeometry: \(strokeGeometry)
+        - strokeMiterAngle: \(strokeMiterAngle)
+        - strokeWeight: \(strokeWeight)
+        - transitionDuration: \(String(describing: transitionDuration))
+        - transitionEasing: \(String(describing: transitionEasing))
+        - transitionNodeID: \(String(describing: transitionNodeID))
+        """
     }
   }
 }
-
-

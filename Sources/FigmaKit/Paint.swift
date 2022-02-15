@@ -1,4 +1,3 @@
-
 /// A Figma Paint.
 ///
 /// "A solid color, gradient, or image texture that can be applied as
@@ -27,8 +26,11 @@ public class Paint: Codable, PolymorphicDecodable, CustomStringConvertible {
   ///
   /// The returned array's values will be instances of the corresponding type of
   /// paint.
-  public static func decodePolymorphicArray(from decoder: UnkeyedDecodingContainer) throws -> [Paint] {
-    return try decodePolyType(from: decoder, keyedBy: Paint.CodingKeys.self, key: .type, typeMap: Paint.typeMap)
+  public static func decodePolymorphicArray(from decoder: UnkeyedDecodingContainer) throws
+    -> [Paint]
+  {
+    return try decodePolyType(
+      from: decoder, keyedBy: Paint.CodingKeys.self, key: .type, typeMap: Paint.typeMap)
   }
 
   static let typeMap: [FigmaType: Paint.Type] = [
@@ -53,13 +55,13 @@ public class Paint: Codable, PolymorphicDecodable, CustomStringConvertible {
 
   public var description: String {
     return """
-            <\(Swift.type(of: self))
-            - type: \(type)
-            - visible: \(visible)
-            - opacity: \(opacity)
-            \(paintDescription.isEmpty ? "" : "\n" + paintDescription)
-            >
-            """
+      <\(Swift.type(of: self))
+      - type: \(type)
+      - visible: \(visible)
+      - opacity: \(opacity)
+      \(paintDescription.isEmpty ? "" : "\n" + paintDescription)
+      >
+      """
   }
 
   var paintDescription: String {
@@ -87,90 +89,86 @@ extension Paint {
 
     override var paintDescription: String {
       return """
-                - color: \(color)
-                """
+        - color: \(color)
+        """
     }
   }
 }
 
-extension Paint {
-  /// A Figma image paint.
-  public final class Image: Paint {
-    /// The scaling mode to use for the image.
-    public let scaleMode: ScaleMode
-    /// Affine transform applied to the image, only present if scaleMode is .stretch.
-    public let imageTransform: Transform?
-    /// Amount image is scaled by in tiling, only present if scaleMode is .tile.
-    public let scalingFactor: Double?
-    /// Image rotation, in degrees.
-    public let rotation: Double
+public final class Image: Paint {
+  /// The scaling mode to use for the image.
+  public let scaleMode: ScaleMode
+  /// Affine transform applied to the image, only present if scaleMode is .stretch.
+  public let imageTransform: Transform?
+  /// Amount image is scaled by in tiling, only present if scaleMode is .tile.
+  public let scalingFactor: Double?
+  /// Image rotation, in degrees.
+  public let rotation: Double
 
-    /// A reference to an image embedded in this node.
-    ///
-    /// To download the image using this reference, use the GET file images endpoint
-    /// to retrieve the mapping from image references to image URLs.
-    public let ref: String?
-    public enum ReferenceType {
-      case image
-      case gif
-    }
-    public let refType: ReferenceType?
+  /// A reference to an image embedded in this node.
+  ///
+  /// To download the image using this reference, use the GET file images endpoint
+  /// to retrieve the mapping from image references to image URLs.
+  public let ref: String?
+  public enum ReferenceType {
+    case image
+    case gif
+  }
+  public let refType: ReferenceType?
 
-    public enum ScaleMode: String, Codable {
-      case fill = "FILL"
-      case fit = "FIT"
-      case tile = "TILE"
-      case stretch = "STRETCH"
-    }
-
-    private enum CodingKeys: String, CodingKey {
-      case scaleMode
-      case imageTransform
-      case scalingFactor
-      case rotation
-      case imageRef
-      case gifRef
-    }
-
-    public required init(from decoder: Decoder) throws {
-      let keyedDecoder = try decoder.container(keyedBy: Self.CodingKeys)
-
-      self.scaleMode = try keyedDecoder.decode(ScaleMode.self, forKey: .scaleMode)
-      self.imageTransform = try keyedDecoder.decodeIfPresent(Transform.self, forKey: .imageTransform)
-      self.scalingFactor = try keyedDecoder.decodeIfPresent(Double.self, forKey: .scalingFactor)
-      self.rotation = try keyedDecoder.decodeIfPresent(Double.self, forKey: .rotation) ?? 0
-      if let imageRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .imageRef) {
-        self.ref = imageRef
-        self.refType = .image
-      } else if let gifRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .gifRef) {
-        self.ref = gifRef
-        self.refType = .gif
-      } else {
-        self.ref = nil
-        self.refType = nil
-      }
-
-      try super.init(from: decoder)
-    }
-
-    override var paintDescription: String {
-      return """
-                - scaleMode: \(scaleMode)
-                - imageTransform: \(String(describing: imageTransform))
-                - scalingFactor: \(String(describing: scalingFactor))
-                - rotation: \(rotation)
-                - ref: \(String(describing: ref))
-                - refType: \(String(describing: refType))
-                """
-    }
+  public enum ScaleMode: String, Codable {
+    case fill = "FILL"
+    case fit = "FIT"
+    case tile = "TILE"
+    case stretch = "STRETCH"
   }
 
-  /// A Figma gradient.
-  public final class Gradient: Paint {
+  private enum CodingKeys: String, CodingKey {
+    case scaleMode
+    case imageTransform
+    case scalingFactor
+    case rotation
+    case imageRef
+    case gifRef
   }
 
-  /// A Figma gradient.
-  public final class Emoji: Paint {
+  public required init(from decoder: Decoder) throws {
+    let keyedDecoder = try decoder.container(keyedBy: Self.CodingKeys)
+
+    self.scaleMode = try keyedDecoder.decode(ScaleMode.self, forKey: .scaleMode)
+    self.imageTransform = try keyedDecoder.decodeIfPresent(Transform.self, forKey: .imageTransform)
+    self.scalingFactor = try keyedDecoder.decodeIfPresent(Double.self, forKey: .scalingFactor)
+    self.rotation = try keyedDecoder.decodeIfPresent(Double.self, forKey: .rotation) ?? 0
+    if let imageRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .imageRef) {
+      self.ref = imageRef
+      self.refType = .image
+    } else if let gifRef = try keyedDecoder.decodeIfPresent(String.self, forKey: .gifRef) {
+      self.ref = gifRef
+      self.refType = .gif
+    } else {
+      self.ref = nil
+      self.refType = nil
+    }
+
+    try super.init(from: decoder)
+  }
+
+  override var paintDescription: String {
+    return """
+      - scaleMode: \(scaleMode)
+      - imageTransform: \(String(describing: imageTransform))
+      - scalingFactor: \(String(describing: scalingFactor))
+      - rotation: \(rotation)
+      - ref: \(String(describing: ref))
+      - refType: \(String(describing: refType))
+      """
   }
 }
 
+/// A Figma gradient.
+public final class Gradient: Paint {
+}
+
+/// A Figma gradient.
+public final class Emoji: Paint {
+}
