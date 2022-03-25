@@ -6,7 +6,7 @@ public struct TypeStyleOverride: Codable {
   public let italic: Bool?
   public let fills: [Paint]?
   public let fontFamily: String?
-  public let fontWeight: Double?
+  public let fontWeight: Int?
   public let fontPostScriptName: String?
   public let fontSize: Double?
   public let hyperlink: Hyperlink?
@@ -35,23 +35,29 @@ public struct TypeStyleOverride: Codable {
       self.fills = nil
     }
     self.fontFamily = try container.decodeIfPresent(String.self, forKey: .fontFamily)
-    self.fontWeight = try container.decodeIfPresent(Double.self, forKey: .fontWeight)
-    self.fontPostScriptName = try container.decodeIfPresent(String.self, forKey: .fontPostScriptName)
+    self.fontWeight = try container.decodeIfPresent(Int.self, forKey: .fontWeight)
+    self.fontPostScriptName = try container.decodeIfPresent(
+      String.self, forKey: .fontPostScriptName)
     self.fontSize = try container.decodeIfPresent(Double.self, forKey: .fontSize)
     self.hyperlink = try container.decodeIfPresent(Hyperlink.self, forKey: .hyperlink)
     self.letterSpacing = try container.decodeIfPresent(Double.self, forKey: .letterSpacing)
     self.lineHeightPx = try container.decodeIfPresent(Double.self, forKey: .lineHeightPx)
-    self.lineHeightPercentFontSize = try container.decodeIfPresent(Double.self, forKey: .lineHeightPx)
-    self.lineHeightUnit = try container.decodeIfPresent(TypeStyle.LineHeightUnit.self, forKey: .lineHeightUnit)
+    self.lineHeightPercentFontSize = try container.decodeIfPresent(
+      Double.self, forKey: .lineHeightPx)
+    self.lineHeightUnit = try container.decodeIfPresent(
+      TypeStyle.LineHeightUnit.self, forKey: .lineHeightUnit)
     self.listSpacing = try container.decodeIfPresent(Double.self, forKey: .listSpacing)
     self.openTypeFlags = try container.decodeIfPresent([String: Bool].self, forKey: .openTypeFlags)
     self.paragraphIndent = try container.decodeIfPresent(Double.self, forKey: .paragraphIndent)
     self.paragraphSpacing = try container.decodeIfPresent(Double.self, forKey: .paragraphSpacing)
-    self.textAlignHorizontal = try container.decodeIfPresent(TypeStyle.TextAlignHorizontal.self, forKey: .textAlignHorizontal)
-    self.textAlignVertical = try container.decodeIfPresent(TypeStyle.TextAlignVertical.self, forKey: .textAlignVertical)
-    self.textAutoResize = try container.decodeIfPresent(TypeStyle.TextAutoResize.self, forKey: .textAutoResize)
+    self.textAlignHorizontal = try container.decodeIfPresent(
+      TypeStyle.TextAlignHorizontal.self, forKey: .textAlignHorizontal)
+    self.textAlignVertical = try container.decodeIfPresent(
+      TypeStyle.TextAlignVertical.self, forKey: .textAlignVertical)
+    self.textAutoResize = try container.decodeIfPresent(
+      TypeStyle.TextAutoResize.self, forKey: .textAutoResize)
     self.textCase = try container.decodeIfPresent(TypeStyle.TextCase.self, forKey: .textCase)
-    self.textDecoration = try container.decodeIfPresent(TypeStyle.TextDecoration.self, forKey: .textDecoration)
+    self.textDecoration = try container.decodeIfPresent(
+      TypeStyle.TextDecoration.self, forKey: .textDecoration)
   }
 }
-
