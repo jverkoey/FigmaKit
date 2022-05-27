@@ -10,7 +10,7 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
   /// The nodes that are attached to this node.
   public let children: [Node]
 
-  private enum CodingKeys: String, CodingKey {
+  enum CodingKeys: String, CodingKey {
     case id
     case name
     case visible
