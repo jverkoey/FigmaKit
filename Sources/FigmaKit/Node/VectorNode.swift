@@ -196,6 +196,7 @@ extension Node {
         - strokeGeometry: \(strokeGeometry)
         - strokeMiterAngle: \(strokeMiterAngle)
         - strokeWeight: \(strokeWeight)
+        - styles: \(styles)
         - transitionDuration: \(String(describing: transitionDuration))
         - transitionEasing: \(String(describing: transitionEasing))
         - transitionNodeID: \(String(describing: transitionNodeID))
