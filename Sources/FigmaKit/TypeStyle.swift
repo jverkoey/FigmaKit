@@ -103,6 +103,7 @@ public struct TypeStyle: Codable {
     case none = "NONE"
     case height = "HEIGHT"
     case widthAndHeight = "WIDTH_AND_HEIGHT"
+    case truncate = "TRUNCATE"
   }
 
   public enum TextCase: String, Codable {
