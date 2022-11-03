@@ -35,6 +35,7 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     case star = "STAR"
     case text = "TEXT"
     case vector = "VECTOR"
+    case section = "SECTION"
   }
 
   static let typeMap: [FigmaType: Node.Type] = [
@@ -50,6 +51,7 @@ public class Node: Codable, PolymorphicDecodable, CustomDebugStringConvertible {
     .line: Node.LineNode.self,
     .rectangle: Node.RectangleNode.self,
     .regularPolygon: Node.RegularPolygonNode.self,
+    .section: Node.SectionNode.self,
     .slice: Node.SliceNode.self,
     .star: Node.StarNode.self,
     .text: Node.TextNode.self,
