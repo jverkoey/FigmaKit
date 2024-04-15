@@ -63,6 +63,8 @@ public struct FileNode: Codable {
       self.document = try keyedDecoder.decode(Node.RectangleNode.self, forKey: .document)
     } else if itemType == Node.RegularPolygonNode.self {
       self.document = try keyedDecoder.decode(Node.RegularPolygonNode.self, forKey: .document)
+    } else if itemType == Node.SectionNode.self {
+      self.document = try keyedDecoder.decode(Node.SectionNode.self, forKey: .document)
     } else if itemType == Node.SliceNode.self {
       self.document = try keyedDecoder.decode(Node.SliceNode.self, forKey: .document)
     } else if itemType == Node.StarNode.self {
